@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище KontragentModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FizL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INN" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="E-mail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IDMenager" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menager">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="E-mail" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="YourL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INN" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="E-mail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IDMenager" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_FizL_FizL">
+          <End Role="Menager" Type="Self.Menager" Multiplicity="1" />
+          <End Role="FizL" Type="Self.FizL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menager">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FizL">
+              <PropertyRef Name="IDMenager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_YourL_Menager">
+          <End Role="Menager" Type="Self.Menager" Multiplicity="1" />
+          <End Role="YourL" Type="Self.YourL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menager">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="YourL">
+              <PropertyRef Name="IDMenager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище KontragentModelContainer">
+          <EntitySet Name="FizL" EntityType="Self.FizL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menager" EntityType="Self.Menager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="YourL" EntityType="Self.YourL" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FizL_FizL" Association="Self.FK_FizL_FizL">
+            <End Role="Menager" EntitySet="Menager" />
+            <End Role="FizL" EntitySet="FizL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_YourL_Menager" Association="Self.FK_YourL_Menager">
+            <End Role="Menager" EntitySet="Menager" />
+            <End Role="YourL" EntitySet="YourL" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KontragentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FizL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="E_mail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDMenager" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menager" Relationship="Self.FK_FizL_FizL" FromRole="FizL" ToRole="Menager" />
+        </EntityType>
+        <EntityType Name="Menager">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="E_mail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FizL" Relationship="Self.FK_FizL_FizL" FromRole="Menager" ToRole="FizL" />
+          <NavigationProperty Name="YourL" Relationship="Self.FK_YourL_Menager" FromRole="Menager" ToRole="YourL" />
+        </EntityType>
+        <EntityType Name="YourL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="E_mail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDMenager" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menager" Relationship="Self.FK_YourL_Menager" FromRole="YourL" ToRole="Menager" />
+        </EntityType>
+        <Association Name="FK_FizL_FizL">
+          <End Role="Menager" Type="Self.Menager" Multiplicity="1" />
+          <End Role="FizL" Type="Self.FizL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menager">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FizL">
+              <PropertyRef Name="IDMenager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_YourL_Menager">
+          <End Role="Menager" Type="Self.Menager" Multiplicity="1" />
+          <End Role="YourL" Type="Self.YourL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menager">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="YourL">
+              <PropertyRef Name="IDMenager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KontragentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FizL" EntityType="Self.FizL" />
+          <EntitySet Name="Menager" EntityType="Self.Menager" />
+          <EntitySet Name="YourL" EntityType="Self.YourL" />
+          <AssociationSet Name="FK_FizL_FizL" Association="Self.FK_FizL_FizL">
+            <End Role="Menager" EntitySet="Menager" />
+            <End Role="FizL" EntitySet="FizL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_YourL_Menager" Association="Self.FK_YourL_Menager">
+            <End Role="Menager" EntitySet="Menager" />
+            <End Role="YourL" EntitySet="YourL" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KontragentModelContainer" CdmEntityContainer="KontragentEntities">
+          <EntitySetMapping Name="FizL">
+            <EntityTypeMapping TypeName="KontragentModel.FizL">
+              <MappingFragment StoreEntitySet="FizL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+                <ScalarProperty Name="IDMenager" ColumnName="IDMenager" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menager">
+            <EntityTypeMapping TypeName="KontragentModel.Menager">
+              <MappingFragment StoreEntitySet="Menager">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YourL">
+            <EntityTypeMapping TypeName="KontragentModel.YourL">
+              <MappingFragment StoreEntitySet="YourL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+                <ScalarProperty Name="IDMenager" ColumnName="IDMenager" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
